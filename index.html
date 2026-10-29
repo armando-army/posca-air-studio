@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8cee2"><meta name="description" content="Elegí tu POSCA y dibujá en el aire con tus manos. Un lienzo interactivo de color."><title>POSCA — El aire es tu lienzo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="paper" aria-label="Lienzo para dibujar con la mano, el mouse o el dedo"></canvas>
+<header>
+ <div class="brand" aria-label="POSCA Air Studio"><span class="uni">uni</span><span class="p">P</span><span class="o">O</span><span class="s">S</span><span class="c">C</span><span class="a">A</span><small>AIR STUDIO</small></div>
+ <div class="tools"><button id="undo" data-gesture="undo" data-hint="Deshacer" title="Deshacer último trazo" aria-label="Deshacer último trazo">↶</button><button id="clear" data-gesture="clear" data-kind="hold" data-hint="Juntá los dedos durante 2 s para borrar" title="Borrar el lienzo" aria-label="Borrar el lienzo">⌫</button><button id="download" data-gesture="download" data-hint="Guardar PNG" class="save">Guardar PNG <span>↗</span></button></div>
+</header>
+<main>
+ <div class="intro"><span class="eyebrow">SIN PAPEL. SIN LÍMITES.</span><h1>El aire es<br>tu lienzo<span>.</span></h1><p>Un color. Tu mano.<br>Todo por crear.</p></div>
+ <div class="marker-wrap"><img id="marker" src="assets/rosa.png" alt="Marcador POSCA rosa" draggable="false"></div>
+ <div class="edition"><span>HECHO PARA</span><strong>salirte<br>de la línea.</strong><span class="star">✳</span></div>
+</main>
+<footer>
+ <section class="palette-panel" aria-label="Elegí un color"><div class="palette-caption"><span>01 / ELEGÍ TU COLOR</span><strong id="colorName">Rosa chicle</strong></div><div class="palette"><button data-color="rosa" style="--swatch:#f44e9d" aria-label="Rosa chicle" aria-pressed="true"></button><button data-color="naranja" style="--swatch:#ff881f" aria-label="Naranja" aria-pressed="false"></button><button data-color="verde" style="--swatch:#3cae71" aria-label="Verde" aria-pressed="false"></button><button data-color="violeta" style="--swatch:#9253ca" aria-label="Violeta" aria-pressed="false"></button></div></section>
+ <section class="instructions"><span class="eyebrow">02 / DIBUJÁ EN EL AIRE</span><p>Juntá los dedos para pintar.<br>Apuntá a un botón para elegirlo.</p><button id="size" data-gesture="size" data-hint="Cambiar grosor" class="size-button"><i id="widthDot"></i><span>Grosor <output id="widthValue">38</output> px</span><span>↔</span></button><small>Esperá a que el aro se complete, o hacé un clic con los dedos.</small></section>
+ <section class="camera-panel"><div class="camera-preview" id="cameraPreview"><video id="video" autoplay playsinline muted></video><span id="cameraSymbol">✋</span><span class="camera-tag" id="cameraTag">TU MANO, TU PINCEL</span></div><button id="camera" data-gesture="camera" data-hint="Apagar cámara"><span class="status-dot"></span><span id="cameraLabel">Activar cámara</span><span>↗</span></button><p id="status" role="status" aria-live="polite">Elegí un color y habilitá la cámara.</p></section>
+</footer>
+<div id="cursor" hidden><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" class="ring-track"/><circle cx="24" cy="24" r="21" class="ring-progress"/></svg><span></span><b id="cursorHint"></b></div><div id="toast" role="status"></div>
+<dialog id="sizeDialog" aria-labelledby="sizeTitle"><div class="dialog-heading"><span class="eyebrow">TU PINCEL</span><h2 id="sizeTitle">Dale tu tamaño.</h2><p>Abrí o cerrá pulgar e índice.<br>Después, apuntá a <strong>Listo</strong> para confirmar.</p></div><div class="width-preview"><span id="sizeSample"></span></div><label for="width">Grosor <output id="draftWidthValue">38 px</output></label><input type="range" id="width" min="12" max="90" value="38"><p class="dialog-note" id="sizeHint">También podés mover el deslizador con mouse o dedo.</p><div class="dialog-actions"><button id="sizeCancel" data-gesture="sizeCancel" data-hint="Cancelar tamaño">Cancelar</button><button id="sizeConfirm" data-gesture="sizeConfirm" data-hint="Confirmar tamaño" class="primary">Listo ✓</button></div></dialog>
+<dialog id="clearDialog" aria-labelledby="clearTitle"><span class="eyebrow">LIENZO NUEVO</span><h2 id="clearTitle">¿Borrar todo?</h2><p>Se eliminarán todos los trazos del lienzo.</p><div class="dialog-actions"><button id="clearCancel" data-gesture="clearCancel" data-hint="Seguir dibujando">Cancelar</button><button id="clearConfirm" data-gesture="clearConfirm" data-kind="hold" data-hint="Juntá los dedos durante 2 s para borrar" class="primary">Sí, borrar</button></div></dialog>
+<script type="module" src="app.js"></script>
+</body></html>
